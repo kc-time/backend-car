@@ -67,6 +67,7 @@ export class CarController {
   @Put("/:id")
   @OnUndefined(404)
   async update(@Param('id') id: string, @Body() body: Car): Promise<Car> {
+    if (!body.licensePlate || !body.registration) return undefined
     let car = await Car.findOne(id)
     if (car == null) return undefined
 
