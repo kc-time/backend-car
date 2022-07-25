@@ -18,7 +18,7 @@ To get the Node server running locally:
 
 `GET /cars`
 
-Use `GET` method on postman with filter
+Use `GET` method on postman with query params
 
 ```js
 http://localhost:8889/users?year={year}&make={make}&name={modelName}
@@ -29,8 +29,6 @@ http://localhost:8889/users?year={year}&make={make}&name={modelName}
 `GET /cars/:id`
 
 Use `GET` method on postman
-
-Can only work after login
 
 ```js
 http://localhost:8889/cars/caridHere
@@ -68,11 +66,12 @@ http://localhost:8889/cars
 
 Use `Put` method on postman with `Body` option `raw` with `JSON`
 
+Assume VIN is unchangeable 
+
 ```js
 {
     "licensePlate": "string",
     "registration": "string",
-    "vin": "string",
     "color": "string",
     "registrationState": "string",
     "registrationName": "string",
