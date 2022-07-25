@@ -1,4 +1,4 @@
-import { Body, Get, JsonController, Post, Delete, Param, OnUndefined, Put, HttpCode } from "routing-controllers";
+import { Body, Get, JsonController, Post, Delete, Param, OnUndefined, Put, QueryParams, HttpCode } from "routing-controllers";
 
 import { Car, CarModel } from "../../models";
 const axios= require('axios');
@@ -7,9 +7,22 @@ const modelFields = {'Model Year': 'year', 'Make': 'make', 'Model': 'name'}
 
 @JsonController("/cars")
 export class CarController {
-  @Get()
-  get(): Promise<Car[]> {
-    return Car.find()
+  @Get() //Get all cars with filter by query params {'year', 'make', 'name'}
+  get(@QueryParams() params: any): Promise<Car[]> {
+    let findOptions = null;
+    if (Object.keys(params).length > 0) {
+      const modelFieldsValues = Object.values(modelFields)
+      for (let prop in params) {
+          if (!modelFieldsValues.includes(prop)) delete params[prop]
+      }
+      findOptions = {
+        where: {
+          model: params,
+        },
+        relations: ["model"],
+      }
+    }
+    return Car.find(findOptions)
   }
 
   @Get('/:id')
