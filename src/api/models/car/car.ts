@@ -1,12 +1,16 @@
 import {
-    BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn,
+    BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
+import { CarModel } from "../car-model/car-model";
 
 @Entity("cars")
 export class Car extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
+
+  @ManyToOne(() => CarModel, (carModel) => carModel.cars)
+    model: CarModel
 
   @Column()
   licensePlate: string;
