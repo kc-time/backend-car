@@ -16,7 +16,7 @@ export class CarModel extends BaseEntity {
   year: number;
 
   @Column()
-  brand: string;
+  make: string;
 
   @OneToMany(() => Car, (car) => car.model)
       cars: Car[]

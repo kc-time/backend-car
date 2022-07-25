@@ -22,7 +22,7 @@ export class Car extends BaseEntity {
   registrationState: string;
 
   @Column({ nullable: true })
-  registrationExpiration: string;
+  registrationExpiration: Date;
 
   @Column({ nullable: true })
   registrationName: string;
@@ -37,7 +37,7 @@ export class Car extends BaseEntity {
   currentMileage: number;
 
   @Column({ nullable: true })
-  description: number;
+  description: string;
 
   @Column({ nullable: true })
   color: string;
